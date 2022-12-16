@@ -6,7 +6,7 @@
 /*   By: jalmeida <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:42:58 by jalmeida          #+#    #+#             */
-/*   Updated: 2022/09/11 01:50:12 by jalmeida         ###   ########.fr       */
+/*   Updated: 2022/09/11 05:22:32 by jalmeida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int contem_novalinha(const char *y)
 	int i;
 
 	i = 0;
-	while (s[i])
+	while (y[i])
 	{
-		if (s[i] == '\n')
+		if (y[i] == '\n')
 			return (1);
 		i++;
 	}
@@ -60,16 +60,16 @@ char	*junta_misto(const char *y1, const char *y2)
 	i = 0;
 	while (y2 && y2[i])
 		i++;
-	s = ft_malloc_zero(len + i + 1, sizeof * s);
-	if (!s)
+	y = ft_malloc_zero(len + i + 1, sizeof * y);
+	if (!y)
 		return (NULL);
 	len = -1;
 	while (y1 && y1[++len])
-		s[len] = y1[len];
+		y[len] = y1[len];
 	i = -1;
 	while (y2 && y2[++i])
-		s[len + i] = y2[i];
-	return (s);
+		y[len + i] = y2[i];
+	return (y);
 }
 
 char	*ft_strdup(const char *s1)

@@ -6,7 +6,7 @@
 /*   By: jalmeida <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:50:53 by jalmeida          #+#    #+#             */
-/*   Updated: 2022/09/11 01:55:11 by jalmeida         ###   ########.fr       */
+/*   Updated: 2022/09/11 05:24:01 by jalmeida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 		ft_liberta_misto(keep, 0, 0);
 		*keep = junta_misto(*tmp, buf);
 		ft_liberta_misto(tmp, 0, 0);
-		if (contains_newline(*keep))
+		if (contem_novalinha(*keep))
 			break ;
 	}
 	ft_liberta_misto(&buf, 0, 0);

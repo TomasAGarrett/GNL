@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalmeida <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:50:53 by jalmeida          #+#    #+#             */
-/*   Updated: 2022/09/11 01:55:11 by jalmeida         ###   ########.fr       */
+/*   Updated: 2022/11/09 23:25:37 by jalmeida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 	char	*buf;
 	int		r;
 
-	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	buf = malloc((BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
 	r = 1;
@@ -87,7 +87,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 		ft_liberta_misto(keep, 0, 0);
 		*keep = junta_misto(*tmp, buf);
 		ft_liberta_misto(tmp, 0, 0);
-		if (contains_newline(*keep))
+		if (contem_novalinha(*keep))
 			break ;
 	}
 	ft_liberta_misto(&buf, 0, 0);
@@ -107,7 +107,7 @@ char	*ft_parse_line(char **keep, char **tmp)
 
 char	*get_next_line(int fd)
 {
-	static char	*keep = NULL;
+	static char	*keep[FOPEN_MAX];
 	char		*tmp;
 	char		*line;
 
@@ -115,12 +115,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = NULL;
 	tmp = NULL;
-	ft_read_line(fd, &keep, &tmp);
-	if (keep != NULL && *keep != '\0')
-		line = ft_parse_line(&keep, &tmp);
+	ft_read_line(fd, &keep[fd], &tmp);
+	if (keep[fd] != NULL && *keep[fd] != '\0')
+		line = ft_parse_line(&keep[fd], &tmp);
 	if (!line || *line == '\0')
 	{
-		ft_liberta_misto(&keep, &line, &tmp);
+		ft_liberta_misto(&keep[fd], &line, &tmp);
 		return (NULL);
 	}
 	return (line);
